@@ -1,0 +1,1127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Devil's Advocate — Tejas Kannadiga</title>
+<meta name="description" content="The Devil's Advocate: a Kannada political-analysis show by Tejas Kannadiga that argues opposing positions to pressure-test the truth behind political claims. Question everything. Understand deeply. Speak fearlessly.">
+<link rel="icon" href="data:,">
+<style>
+/* =========================================================
+   TEJAS KANNADIGA — THE DEVIL'S ADVOCATE
+   Design language: investigative case-file / cross-examination
+   ========================================================= */
+
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,500;9..144,600;9..144,700;9..144,900&family=Work+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Noto+Serif+Kannada:wght@400;600;700&display=swap');
+
+:root{
+  /* --- color tokens --- */
+  --ink:        #100D0C;   /* near-black warm background */
+  --ink-2:      #17130F;   /* slightly raised panel */
+  --ink-3:      #1F1A15;   /* card surface */
+  --line:       #33291F;   /* hairline borders on dark */
+  --oxblood:    #7A1E1E;   /* leather-chair maroon accent */
+  --oxblood-2:  #9C2B24;
+  --gold:       #C9982E;   /* primary gold */
+  --gold-hi:    #E8B94A;   /* bright hover gold */
+  --parchment:  #EDE3CF;   /* warm off-white */
+  --ivory:      #F5F1E8;   /* body text on dark */
+  --smoke:      #A79E8E;   /* muted secondary text */
+  --smoke-dim:  #776E60;
+
+  /* --- type --- */
+  --display: 'Fraunces', 'Noto Serif Kannada', serif;
+  --kannada: 'Noto Serif Kannada', serif;
+  --body: 'Work Sans', 'Noto Serif Kannada', sans-serif;
+  --mono: 'JetBrains Mono', monospace;
+
+  --container: 1180px;
+}
+
+*,*::before,*::after{ box-sizing:border-box; }
+html{ scroll-behavior:smooth; }
+body{
+  margin:0;
+  background:var(--ink);
+  color:var(--ivory);
+  font-family:var(--body);
+  font-size:16px;
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+}
+img{ max-width:100%; display:block; }
+a{ color:inherit; text-decoration:none; }
+h1,h2,h3,h4{ font-family:var(--display); font-weight:600; margin:0; color:var(--parchment); }
+p{ margin:0; }
+ul{ margin:0; padding:0; list-style:none; }
+button{ font-family:inherit; cursor:pointer; }
+
+:focus-visible{
+  outline:2px solid var(--gold-hi);
+  outline-offset:3px;
+}
+
+@media (prefers-reduced-motion: reduce){
+  *{ animation-duration:0.001ms !important; animation-iteration-count:1 !important; transition-duration:0.001ms !important; scroll-behavior:auto !important; }
+}
+
+.wrap{
+  max-width:var(--container);
+  margin:0 auto;
+  padding:0 28px;
+}
+
+/* texture: faint paper-grain + vignette on dark */
+body::before{
+  content:"";
+  position:fixed; inset:0;
+  pointer-events:none;
+  z-index:0;
+  background-image:
+    radial-gradient(ellipse at 15% 0%, rgba(122,30,30,0.16), transparent 55%),
+    radial-gradient(ellipse at 100% 100%, rgba(201,152,46,0.08), transparent 50%);
+}
+
+/* =========================================================
+   EYEBROW / LABELS — file-stamp vocabulary
+   ========================================================= */
+.eyebrow{
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  font-family:var(--mono);
+  font-size:12px;
+  letter-spacing:0.14em;
+  text-transform:uppercase;
+  color:var(--gold);
+}
+.eyebrow::before{
+  content:"";
+  width:18px; height:1px;
+  background:var(--gold);
+  display:inline-block;
+}
+
+.stamp{
+  font-family:var(--mono);
+  font-size:11px;
+  letter-spacing:0.12em;
+  text-transform:uppercase;
+  border:1px solid currentColor;
+  border-radius:3px;
+  padding:4px 10px;
+  display:inline-block;
+  transform:rotate(-3deg);
+}
+.stamp--ongoing{ color:var(--gold-hi); }
+.stamp--resolved{ color:#8BAA7A; }
+.stamp--record{ color:var(--smoke); }
+
+/* =========================================================
+   HEADER / NAV
+   ========================================================= */
+.site-header{
+  position:sticky; top:0; z-index:50;
+  background:rgba(16,13,12,0.86);
+  backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--line);
+}
+.nav{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:16px 0;
+}
+.brand{
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+.brand-mark{
+  width:40px; height:40px;
+  flex-shrink:0;
+}
+.brand-text{
+  display:flex;
+  flex-direction:column;
+  line-height:1.15;
+}
+.brand-text .name{
+  font-family:var(--display);
+  font-weight:700;
+  font-size:17px;
+  color:var(--parchment);
+  letter-spacing:0.01em;
+}
+.brand-text .tag{
+  font-family:var(--mono);
+  font-size:10px;
+  letter-spacing:0.12em;
+  color:var(--gold);
+  text-transform:uppercase;
+}
+.nav-links{
+  display:flex;
+  align-items:center;
+  gap:36px;
+}
+.nav-links a{
+  font-family:var(--mono);
+  font-size:12.5px;
+  letter-spacing:0.08em;
+  text-transform:uppercase;
+  color:var(--smoke);
+  position:relative;
+  padding:6px 0;
+  transition:color .2s ease;
+}
+.nav-links a:hover, .nav-links a.active{ color:var(--gold-hi); }
+.nav-links a.active::after{
+  content:"";
+  position:absolute; left:0; right:0; bottom:0;
+  height:1px; background:var(--gold-hi);
+}
+.nav-cta{
+  font-family:var(--mono);
+  font-size:12px;
+  letter-spacing:0.08em;
+  text-transform:uppercase;
+  color:var(--ink);
+  background:var(--gold);
+  padding:10px 18px;
+  border-radius:2px;
+  transition:background .2s ease, transform .2s ease;
+  white-space:nowrap;
+}
+.nav-cta:hover{ background:var(--gold-hi); transform:translateY(-1px); }
+
+.nav-toggle{
+  display:none;
+  background:none; border:1px solid var(--line);
+  width:42px; height:42px;
+  border-radius:2px;
+  color:var(--parchment);
+  align-items:center; justify-content:center;
+}
+.nav-toggle svg{ width:20px; height:20px; }
+
+@media (max-width: 860px){
+  .nav-links{
+    position:fixed; top:73px; left:0; right:0;
+    background:var(--ink-2);
+    border-bottom:1px solid var(--line);
+    flex-direction:column;
+    align-items:flex-start;
+    gap:0;
+    padding:8px 28px 20px;
+    transform:translateY(-8px);
+    opacity:0;
+    pointer-events:none;
+    transition:opacity .2s ease, transform .2s ease;
+  }
+  .nav-links.open{ opacity:1; transform:translateY(0); pointer-events:auto; }
+  .nav-links a{ width:100%; padding:14px 0; border-bottom:1px solid var(--line); }
+  .nav-cta{ margin-top:14px; }
+  .nav-toggle{ display:inline-flex; }
+}
+
+/* =========================================================
+   BUTTONS
+   ========================================================= */
+.btn{
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  font-family:var(--mono);
+  font-size:13px;
+  letter-spacing:0.08em;
+  text-transform:uppercase;
+  padding:14px 24px;
+  border-radius:2px;
+  border:1px solid transparent;
+  transition:all .2s ease;
+}
+.btn--primary{
+  background:var(--gold);
+  color:var(--ink);
+}
+.btn--primary:hover{ background:var(--gold-hi); transform:translateY(-2px); }
+.btn--ghost{
+  border-color:var(--line);
+  color:var(--parchment);
+}
+.btn--ghost:hover{ border-color:var(--gold); color:var(--gold-hi); }
+.btn--oxblood{
+  background:var(--oxblood);
+  color:var(--ivory);
+}
+.btn--oxblood:hover{ background:var(--oxblood-2); transform:translateY(-2px); }
+
+/* =========================================================
+   SOUNDWAVE DIVIDER (signature motif, echoes the logo mic)
+   ========================================================= */
+.soundwave{
+  display:flex;
+  align-items:center;
+  gap:3px;
+  height:22px;
+}
+.soundwave span{
+  width:3px;
+  background:var(--gold);
+  opacity:0.75;
+  border-radius:1px;
+  animation:wave 1.6s ease-in-out infinite;
+}
+.soundwave span:nth-child(1){ height:40%; animation-delay:0s; }
+.soundwave span:nth-child(2){ height:100%; animation-delay:0.15s; }
+.soundwave span:nth-child(3){ height:60%; animation-delay:0.3s; }
+.soundwave span:nth-child(4){ height:85%; animation-delay:0.45s; }
+.soundwave span:nth-child(5){ height:50%; animation-delay:0.6s; }
+.soundwave span:nth-child(6){ height:75%; animation-delay:0.75s; }
+.soundwave span:nth-child(7){ height:35%; animation-delay:0.9s; }
+@keyframes wave{
+  0%,100%{ transform:scaleY(0.4); }
+  50%{ transform:scaleY(1); }
+}
+
+.rule{
+  height:1px;
+  background:linear-gradient(90deg, var(--line), transparent);
+}
+.rule--full{ background:var(--line); }
+
+/* =========================================================
+   HERO
+   ========================================================= */
+.hero{
+  position:relative;
+  padding:96px 0 72px;
+  border-bottom:1px solid var(--line);
+  overflow:hidden;
+}
+.hero-grid{
+  display:grid;
+  grid-template-columns:1.15fr 0.85fr;
+  gap:60px;
+  align-items:center;
+}
+.hero h1{
+  font-size:clamp(42px, 6.2vw, 84px);
+  line-height:0.98;
+  color:var(--parchment);
+  margin:18px 0 22px;
+}
+.hero h1 em{
+  font-style:italic;
+  color:var(--gold);
+}
+.hero .kannada-line{
+  font-family:var(--kannada);
+  font-size:19px;
+  line-height:1.9;
+  color:var(--smoke);
+  max-width:56ch;
+  margin-bottom:14px;
+}
+.hero .en-line{
+  color:var(--ivory);
+  max-width:52ch;
+  font-size:16px;
+  margin-bottom:32px;
+}
+.hero-actions{
+  display:flex;
+  gap:14px;
+  flex-wrap:wrap;
+  margin-bottom:36px;
+}
+.hero-meta{
+  display:flex;
+  gap:28px;
+  flex-wrap:wrap;
+}
+.hero-meta .m{
+  font-family:var(--mono);
+  font-size:11.5px;
+  color:var(--smoke-dim);
+  text-transform:uppercase;
+  letter-spacing:0.08em;
+}
+.hero-meta .m b{
+  display:block;
+  font-family:var(--display);
+  font-size:24px;
+  color:var(--gold-hi);
+  text-transform:none;
+  letter-spacing:0;
+  margin-bottom:2px;
+}
+
+.hero-panel{
+  border:1px solid var(--line);
+  background:var(--ink-2);
+  padding:28px;
+  position:relative;
+}
+.hero-panel::before{
+  content:"CASE ON RECORD";
+  position:absolute;
+  top:-11px; left:24px;
+  background:var(--ink);
+  padding:0 10px;
+  font-family:var(--mono);
+  font-size:10px;
+  letter-spacing:0.14em;
+  color:var(--gold);
+}
+.hero-panel .num{
+  font-family:var(--mono);
+  color:var(--smoke-dim);
+  font-size:12px;
+  margin-bottom:10px;
+}
+.hero-panel h3{
+  font-size:22px;
+  color:var(--parchment);
+  margin-bottom:10px;
+  line-height:1.25;
+}
+.hero-panel p{
+  color:var(--smoke);
+  font-size:14.5px;
+  line-height:1.7;
+  margin-bottom:18px;
+}
+.hero-panel a.watch{
+  font-family:var(--mono);
+  font-size:12px;
+  letter-spacing:0.08em;
+  color:var(--gold-hi);
+  text-transform:uppercase;
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+}
+.hero-panel a.watch:hover{ color:var(--parchment); }
+
+/* =========================================================
+   SECTION SCAFFOLDING
+   ========================================================= */
+section{ position:relative; z-index:1; }
+.section{
+  padding:88px 0;
+  border-bottom:1px solid var(--line);
+}
+.section-head{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-end;
+  gap:40px;
+  margin-bottom:52px;
+  flex-wrap:wrap;
+}
+.section-head h2{
+  font-size:clamp(30px,3.6vw,46px);
+  color:var(--parchment);
+  margin-top:14px;
+  max-width:16ch;
+}
+.section-head .lede{
+  max-width:38ch;
+  color:var(--smoke);
+  font-size:15px;
+  line-height:1.7;
+}
+
+/* =========================================================
+   PRINCIPLES (Question / Understand / Speak)
+   ========================================================= */
+.principles{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:1px;
+  background:var(--line);
+  border:1px solid var(--line);
+}
+.principle{
+  background:var(--ink);
+  padding:36px 30px;
+}
+.principle .pi-num{
+  font-family:var(--mono);
+  color:var(--oxblood-2);
+  font-size:12px;
+  letter-spacing:0.1em;
+}
+.principle h3{
+  font-size:24px;
+  margin:16px 0 12px;
+  color:var(--gold-hi);
+}
+.principle p{
+  color:var(--smoke);
+  font-size:14.5px;
+  line-height:1.75;
+}
+
+/* =========================================================
+   DOCKET / CASE FILE CARDS (episodes)
+   ========================================================= */
+.docket{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:22px;
+}
+.file-card{
+  border:1px solid var(--line);
+  background:var(--ink-2);
+  padding:26px;
+  display:flex;
+  flex-direction:column;
+  gap:14px;
+  transition:border-color .2s ease, transform .2s ease;
+  position:relative;
+}
+.file-card:hover{ border-color:var(--gold); transform:translateY(-4px); }
+.file-card .row-top{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-start;
+}
+.file-card .file-num{
+  font-family:var(--mono);
+  font-size:11px;
+  color:var(--smoke-dim);
+}
+.file-card h3{
+  font-size:20px;
+  line-height:1.3;
+  color:var(--parchment);
+}
+.file-card p{
+  color:var(--smoke);
+  font-size:14px;
+  line-height:1.7;
+}
+.file-card .tags{
+  display:flex; gap:8px; flex-wrap:wrap;
+  margin-top:auto;
+}
+.file-card .tags span{
+  font-family:var(--mono);
+  font-size:10px;
+  letter-spacing:0.06em;
+  text-transform:uppercase;
+  color:var(--gold);
+  border:1px solid var(--line);
+  padding:4px 8px;
+  border-radius:2px;
+}
+.file-card .watch-link{
+  font-family:var(--mono);
+  font-size:11.5px;
+  letter-spacing:0.06em;
+  text-transform:uppercase;
+  color:var(--gold-hi);
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+}
+
+/* =========================================================
+   FOOTER
+   ========================================================= */
+.site-footer{
+  padding:64px 0 32px;
+}
+.footer-top{
+  display:grid;
+  grid-template-columns:1.4fr 1fr 1fr;
+  gap:48px;
+  padding-bottom:44px;
+  border-bottom:1px solid var(--line);
+}
+.footer-brand .brand{ margin-bottom:16px; }
+.footer-brand p{
+  color:var(--smoke);
+  font-size:14px;
+  line-height:1.75;
+  max-width:38ch;
+}
+.footer-col h4{
+  font-family:var(--mono);
+  font-size:11px;
+  letter-spacing:0.12em;
+  text-transform:uppercase;
+  color:var(--gold);
+  margin-bottom:18px;
+}
+.footer-col a, .footer-col span{
+  display:block;
+  color:var(--smoke);
+  font-size:14px;
+  margin-bottom:12px;
+  transition:color .2s ease;
+}
+.footer-col a:hover{ color:var(--gold-hi); }
+.footer-bottom{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding-top:26px;
+  flex-wrap:wrap;
+  gap:14px;
+}
+.footer-bottom p{
+  font-family:var(--mono);
+  font-size:11.5px;
+  color:var(--smoke-dim);
+}
+.footer-bottom .legal-links{
+  display:flex; gap:22px;
+}
+.footer-bottom .legal-links a{
+  font-family:var(--mono);
+  font-size:11.5px;
+  color:var(--smoke-dim);
+}
+.footer-bottom .legal-links a:hover{ color:var(--gold-hi); }
+
+/* =========================================================
+   PAGE HEADER (inner pages)
+   ========================================================= */
+.page-header{
+  padding:64px 0 56px;
+  border-bottom:1px solid var(--line);
+}
+.page-header h1{
+  font-size:clamp(36px,5vw,58px);
+  margin-top:16px;
+  max-width:20ch;
+}
+.page-header .lede{
+  color:var(--smoke);
+  max-width:60ch;
+  margin-top:18px;
+  font-size:16px;
+  line-height:1.75;
+}
+
+/* =========================================================
+   GENERIC CONTENT (about / privacy)
+   ========================================================= */
+.prose{
+  max-width:760px;
+}
+.prose h2{
+  font-size:26px;
+  color:var(--gold-hi);
+  margin:44px 0 16px;
+}
+.prose h2:first-child{ margin-top:0; }
+.prose p{
+  color:var(--smoke);
+  font-size:15.5px;
+  line-height:1.85;
+  margin-bottom:18px;
+}
+.prose ul{ margin:0 0 18px; }
+.prose li{
+  color:var(--smoke);
+  font-size:15.5px;
+  line-height:1.85;
+  padding-left:22px;
+  position:relative;
+  margin-bottom:10px;
+}
+.prose li::before{
+  content:"—";
+  position:absolute; left:0; color:var(--gold);
+}
+.prose strong{ color:var(--parchment); }
+
+.two-col{
+  display:grid;
+  grid-template-columns:0.9fr 1.1fr;
+  gap:64px;
+}
+@media (max-width: 900px){
+  .two-col{ grid-template-columns:1fr; gap:36px; }
+}
+
+.credential-list{
+  display:flex;
+  flex-direction:column;
+  gap:0;
+  border-top:1px solid var(--line);
+}
+.credential-list li{
+  display:flex;
+  justify-content:space-between;
+  padding:16px 0;
+  border-bottom:1px solid var(--line);
+  font-size:14px;
+}
+.credential-list li span:first-child{ color:var(--parchment); }
+.credential-list li span:last-child{
+  color:var(--smoke-dim);
+  font-family:var(--mono);
+  font-size:12px;
+}
+
+.portrait-frame{
+  border:1px solid var(--line);
+  background:var(--ink-2);
+  aspect-ratio:4/5;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  position:relative;
+  overflow:hidden;
+}
+.portrait-frame::before{
+  content:"EXHIBIT A";
+  position:absolute; top:16px; left:16px;
+  font-family:var(--mono);
+  font-size:10px;
+  letter-spacing:0.14em;
+  color:var(--gold);
+  z-index:2;
+}
+.portrait-frame .mark{
+  width:44%;
+  opacity:0.85;
+}
+
+/* =========================================================
+   CONTACT PAGE
+   ========================================================= */
+.contact-grid{
+  display:grid;
+  grid-template-columns:0.9fr 1.1fr;
+  gap:60px;
+}
+@media (max-width: 900px){ .contact-grid{ grid-template-columns:1fr; } }
+
+.contact-card{
+  border:1px solid var(--line);
+  background:var(--ink-2);
+  padding:28px;
+  margin-bottom:16px;
+}
+.contact-card .k{
+  font-family:var(--mono);
+  font-size:11px;
+  letter-spacing:0.12em;
+  text-transform:uppercase;
+  color:var(--gold);
+  margin-bottom:10px;
+  display:block;
+}
+.contact-card .v{
+  font-family:var(--display);
+  font-size:21px;
+  color:var(--parchment);
+}
+.contact-card .v a:hover{ color:var(--gold-hi); }
+
+.form-field{
+  margin-bottom:22px;
+}
+.form-field label{
+  display:block;
+  font-family:var(--mono);
+  font-size:11px;
+  letter-spacing:0.1em;
+  text-transform:uppercase;
+  color:var(--smoke);
+  margin-bottom:10px;
+}
+.form-field input, .form-field select, .form-field textarea{
+  width:100%;
+  background:var(--ink-2);
+  border:1px solid var(--line);
+  color:var(--ivory);
+  padding:14px 16px;
+  font-family:var(--body);
+  font-size:14.5px;
+  border-radius:2px;
+  transition:border-color .2s ease;
+}
+.form-field input:focus, .form-field select:focus, .form-field textarea:focus{
+  outline:none;
+  border-color:var(--gold);
+}
+.form-field textarea{ resize:vertical; min-height:130px; }
+.form-note{
+  font-size:12.5px;
+  color:var(--smoke-dim);
+  margin-top:-6px;
+  margin-bottom:24px;
+}
+.form-status{
+  font-family:var(--mono);
+  font-size:12.5px;
+  color:var(--gold-hi);
+  margin-top:14px;
+  display:none;
+}
+.form-status.show{ display:block; }
+
+/* =========================================================
+   MISC
+   ========================================================= */
+.reveal{
+  opacity:0;
+  transform:translateY(18px);
+  transition:opacity .6s ease, transform .6s ease;
+}
+.reveal.in{ opacity:1; transform:translateY(0); }
+
+.cta-band{
+  padding:80px 0;
+  text-align:center;
+  background:
+    linear-gradient(180deg, transparent, rgba(122,30,30,0.10));
+}
+.cta-band h2{
+  font-size:clamp(28px,4vw,44px);
+  max-width:18ch;
+  margin:16px auto 30px;
+}
+.cta-band-actions{
+  display:flex; gap:14px; justify-content:center; flex-wrap:wrap;
+}
+
+.badge-row{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+  margin-top:18px;
+}
+.badge{
+  font-family:var(--mono);
+  font-size:11px;
+  letter-spacing:0.06em;
+  text-transform:uppercase;
+  color:var(--smoke);
+  border:1px solid var(--line);
+  padding:6px 12px;
+  border-radius:2px;
+}
+
+.filter-btn.is-active{
+  background:var(--gold);
+  color:var(--ink);
+  border-color:var(--gold);
+}
+
+@media (max-width: 900px){
+  .hero-grid{ grid-template-columns:1fr; }
+  .principles{ grid-template-columns:1fr; }
+  .docket{ grid-template-columns:1fr; }
+  .footer-top{ grid-template-columns:1fr; gap:32px; }
+}
+
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <nav class="nav wrap">
+    <a href="index.html" class="brand">
+      <svg class="brand-mark" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="24" cy="24" r="23" fill="#100D0C" stroke="#C9982E" stroke-width="1.5"/>
+        <rect x="19.5" y="12" width="9" height="15" rx="4.5" fill="#EDE3CF"/>
+        <path d="M14 23a10 10 0 0 0 20 0" stroke="#C9982E" stroke-width="2" stroke-linecap="round"/>
+        <line x1="24" y1="33" x2="24" y2="38" stroke="#C9982E" stroke-width="2" stroke-linecap="round"/>
+        <line x1="18" y1="38" x2="30" y2="38" stroke="#C9982E" stroke-width="2" stroke-linecap="round"/>
+      </svg>
+      <span class="brand-text">
+        <span class="name">Tejas Kannadiga</span>
+        <span class="tag">The Devil's Advocate</span>
+      </span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html" class="active">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="episodes.html">Episodes</a></li>
+      <li><a href="contact.html">Contact</a></li>
+      <li><a class="nav-cta" href="https://www.youtube.com/@tejaskannadiga25" target="_blank" rel="noopener">Watch on YouTube</a></li>
+    </ul>
+    <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    </button>
+  </nav>
+</header>
+
+<main>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <span class="eyebrow">Tejas Kannadiga YouTube Channel Presents</span>
+        <h1>The <em>Devil's</em><br>Advocate.</h1>
+        <p class="kannada-line">ನನ್ನದಲ್ಲದ ಆಭಿಪ್ರಾಯಗಳನ್ನ ಬಳಸಿ ಪಕ್ಷಾತೀತವಾಗಿ ರಾಜಕೀಯ ವ್ಯಕ್ತಿಗಳ ನಿಲುವನ್ನ ವಿರೋಧಿಸುವ ಮೂಲಕ ಸತ್ಯಾಸತ್ಯತೆಯನ್ನ ಹೊರತೆಗೆಯುವ ಕಾರ್ಯಕ್ರಮ.</p>
+        <p class="en-line">A program that uncovers the truth by impartially arguing against the positions of political figures, using opinions that are not the host's own — cross-examining power, regardless of party.</p>
+        <div class="hero-actions">
+          <a class="btn btn--primary" href="https://www.youtube.com/@tejaskannadiga25" target="_blank" rel="noopener">Watch the show</a>
+          <a class="btn btn--ghost" href="about.html">Meet Tejas</a>
+        </div>
+        <div class="hero-meta">
+          <div class="m"><b>Impartial</b>Party-agnostic cross-examination</div>
+          <div class="m"><b>Kannada</b>Delivered for the Kannadiga audience</div>
+          <div class="m"><b>Evidence-first</b>Claims tested, not repeated</div>
+        </div>
+      </div>
+
+      <div class="hero-panel reveal">
+        <div class="num">CASE FILE No. 001</div>
+        <span class="stamp stamp--ongoing">Ongoing</span>
+        <h3 style="margin-top:14px;">The Bidadi Township Question</h3>
+        <p>A proposed integrated township near Bengaluru has put the state government's land-acquisition plans on trial in the court of public opinion — farmers on one side, a redevelopment vision on the other. The Devil's Advocate steps into the harder-to-defend chair on purpose, to see what the argument looks like from there.</p>
+        <a class="watch" href="https://www.youtube.com/@tejaskannadiga25" target="_blank" rel="noopener">Watch the breakdown →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- SOUNDWAVE DIVIDER -->
+  <div class="wrap" style="padding:26px 28px; display:flex; align-items:center; gap:16px; border-bottom:1px solid var(--line);">
+    <div class="soundwave"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
+    <span style="font-family:var(--mono); font-size:11px; letter-spacing:0.12em; text-transform:uppercase; color:var(--smoke-dim);">New Devil's Detail, straight from Karnataka</span>
+  </div>
+
+  <!-- METHOD / PRINCIPLES -->
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <span class="eyebrow">The Method</span>
+          <h2>Three rules the show never breaks.</h2>
+        </div>
+        <p class="lede">The Devil's Advocate isn't built to agree with anyone. It's built to make sure your own opinion can survive contact with its strongest opposite.</p>
+      </div>
+      <div class="principles">
+        <div class="principle reveal">
+          <span class="pi-num">01 / QUESTION EVERYTHING</span>
+          <h3>Question Everything</h3>
+          <p>No position — ruling party or opposition — gets a free pass. Every claim made in public is treated as a claim to be tested, not a fact to be repeated.</p>
+        </div>
+        <div class="principle reveal">
+          <span class="pi-num">02 / UNDERSTAND DEEPLY</span>
+          <h3>Understand Deeply</h3>
+          <p>Before a position is argued, it's studied — the policy, the history, the numbers, and the people it actually affects on the ground.</p>
+        </div>
+        <div class="principle reveal">
+          <span class="pi-num">03 / SPEAK FEARLESSLY</span>
+          <h3>Speak Fearlessly</h3>
+          <p>Once the homework is done, the conclusion is stated plainly, in Kannada, without hedging it into meaninglessness to keep everyone comfortable.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT TEASER -->
+  <section class="section">
+    <div class="wrap two-col">
+      <div>
+        <span class="eyebrow">On the Record</span>
+        <h2 style="margin-top:14px; font-size:36px;">Presented by a socio-political analyst, not a performer.</h2>
+      </div>
+      <div>
+        <p style="color:var(--smoke); font-size:15.5px; line-height:1.85; margin-bottom:22px;">Tejas S built The Devil's Advocate out of a UPSC-KPSC educator's habit: read the source document before forming an opinion. That same discipline — polity, economy, public administration — is what shapes every episode, whether the subject is a land-acquisition notice, a welfare scheme, or a budget line nobody bothered to explain to the public.</p>
+        <div class="badge-row">
+          <span class="badge">Socio-Political Analyst</span>
+          <span class="badge">Content Creator</span>
+          <span class="badge">UPSC–KPSC Educator</span>
+        </div>
+        <div style="margin-top:28px;">
+          <a class="btn btn--ghost" href="about.html">Read the full profile →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LATEST DOCKET -->
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <span class="eyebrow">The Docket</span>
+          <h2>What's currently under cross-examination.</h2>
+        </div>
+        <a class="btn btn--ghost" href="episodes.html">View all case files →</a>
+      </div>
+      <div class="docket">
+        <div class="file-card reveal">
+          <div class="row-top">
+            <span class="file-num">FILE 001</span>
+            <span class="stamp stamp--ongoing">Ongoing</span>
+          </div>
+          <h3>The Bidadi Township Question</h3>
+          <p>Land acquisition, farmer protests, and a state government's redevelopment ambitions — argued from the side you probably didn't expect.</p>
+          <div class="tags"><span>Land &amp; Policy</span><span>Bengaluru</span></div>
+          <a class="watch-link" href="https://www.youtube.com/@tejaskannadiga25" target="_blank" rel="noopener">Watch on YouTube →</a>
+        </div>
+        <div class="file-card reveal">
+          <div class="row-top">
+            <span class="file-num">FILE 002</span>
+            <span class="stamp stamp--record">Recurring</span>
+          </div>
+          <h3>Public Fund Accountability</h3>
+          <p>Where government scheme money is supposed to go, where it's alleged to actually go, and how a citizen can legally find out for themselves.</p>
+          <div class="tags"><span>Governance</span><span>RTI</span></div>
+          <a class="watch-link" href="https://www.youtube.com/@tejaskannadiga25" target="_blank" rel="noopener">Watch on YouTube →</a>
+        </div>
+        <div class="file-card reveal">
+          <div class="row-top">
+            <span class="file-num">FILE 003</span>
+            <span class="stamp stamp--record">Recurring</span>
+          </div>
+          <h3>Policy, Plainly Explained</h3>
+          <p>Polity and economy, taught the way a UPSC-KPSC classroom would teach it — then pointed straight at this week's headline.</p>
+          <div class="tags"><span>Polity</span><span>Economy</span></div>
+          <a class="watch-link" href="https://www.youtube.com/@tejaskannadiga25" target="_blank" rel="noopener">Watch on YouTube →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-band">
+    <div class="wrap">
+      <span class="eyebrow" style="justify-content:center;">ಕನ್ನಡವನ್ನ ಬಳಸಿ, ಕನ್ನಡವೇ ನಿಮ್ಮನ್ನ ಬೆಳೆಸುತ್ತದೆ</span>
+      <h2>Cross-examine the news with us every week.</h2>
+      <div class="cta-band-actions">
+        <a class="btn btn--primary" href="https://www.youtube.com/@tejaskannadiga25" target="_blank" rel="noopener">Subscribe on YouTube</a>
+        <a class="btn btn--ghost" href="https://www.instagram.com/tejas_kannadiga_25" target="_blank" rel="noopener">Follow on Instagram</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer wrap">
+  <div class="footer-top">
+    <div class="footer-brand">
+      <a href="index.html" class="brand">
+        <svg class="brand-mark" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="24" cy="24" r="23" fill="#100D0C" stroke="#C9982E" stroke-width="1.5"/>
+          <rect x="19.5" y="12" width="9" height="15" rx="4.5" fill="#EDE3CF"/>
+          <path d="M14 23a10 10 0 0 0 20 0" stroke="#C9982E" stroke-width="2" stroke-linecap="round"/>
+          <line x1="24" y1="33" x2="24" y2="38" stroke="#C9982E" stroke-width="2" stroke-linecap="round"/>
+          <line x1="18" y1="38" x2="30" y2="38" stroke="#C9982E" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+        <span class="brand-text">
+          <span class="name">Tejas Kannadiga</span>
+          <span class="tag">The Devil's Advocate</span>
+        </span>
+      </a>
+      <p>Proud Bharatiya, proud Kannadiga. A socio-political analyst and UPSC–KPSC educator arguing the other side, so the truth has to show up and defend itself.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Navigate</h4>
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="episodes.html">Episodes</a>
+      <a href="contact.html">Contact</a>
+    </div>
+    <div class="footer-col">
+      <h4>Elsewhere</h4>
+      <a href="https://www.youtube.com/@tejaskannadiga25" target="_blank" rel="noopener">YouTube</a>
+      <a href="https://www.instagram.com/tejas_kannadiga_25" target="_blank" rel="noopener">Instagram</a>
+      <span>tejaskannadiga2501@gmail.com</span>
+      <span>+91 91483 65981</span>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2026 Tejas Kannadiga — The Devil's Advocate. All rights reserved.</p>
+    <div class="legal-links">
+      <a href="privacy.html">Privacy Policy</a>
+      <a href="contact.html">Contact</a>
+      <a href="https://gcklab.com/" target="_blank" rel="noopener">Developed by GCK Lab</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+// TEJAS KANNADIGA — THE DEVIL'S ADVOCATE
+// Shared site behaviour
+
+document.addEventListener('DOMContentLoaded', () => {
+
+  /* Mobile nav toggle */
+  const toggle = document.querySelector('.nav-toggle');
+  const links = document.querySelector('.nav-links');
+  if (toggle && links) {
+    toggle.addEventListener('click', () => {
+      const open = links.classList.toggle('open');
+      toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+    links.querySelectorAll('a').forEach(a => {
+      a.addEventListener('click', () => links.classList.remove('open'));
+    });
+  }
+
+  /* Scroll reveal */
+  const revealEls = document.querySelectorAll('.reveal');
+  if ('IntersectionObserver' in window && revealEls.length) {
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in');
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15 });
+    revealEls.forEach(el => io.observe(el));
+  } else {
+    revealEls.forEach(el => el.classList.add('in'));
+  }
+
+  /* Episode / docket topic filter (episodes.html) */
+  const filterBtns = document.querySelectorAll('.filter-btn');
+  const fileCards = document.querySelectorAll('[data-topic]');
+  if (filterBtns.length && fileCards.length) {
+    filterBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        filterBtns.forEach(b => b.classList.remove('is-active'));
+        btn.classList.add('is-active');
+        const topic = btn.getAttribute('data-filter');
+        fileCards.forEach(card => {
+          const match = topic === 'all' || card.getAttribute('data-topic').includes(topic);
+          card.style.display = match ? '' : 'none';
+        });
+      });
+    });
+  }
+
+  /* Contact form — mailto fallback (static hosting, no backend) */
+  const form = document.querySelector('#contact-form');
+  if (form) {
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const name = form.querySelector('#name').value.trim();
+      const email = form.querySelector('#email').value.trim();
+      const reason = form.querySelector('#reason').value;
+      const message = form.querySelector('#message').value.trim();
+
+      const subject = encodeURIComponent(`[Website] ${reason || 'General inquiry'} — ${name}`);
+      const body = encodeURIComponent(`${message}\n\n— ${name} (${email})`);
+      window.location.href = `mailto:tejaskannadiga2501@gmail.com?subject=${subject}&body=${body}`;
+
+      const status = document.querySelector('#form-status');
+      if (status) {
+        status.textContent = 'Opening your email app to send this message…';
+        status.classList.add('show');
+      }
+    });
+  }
+
+});
+
+</script>
+</body>
+</html>
